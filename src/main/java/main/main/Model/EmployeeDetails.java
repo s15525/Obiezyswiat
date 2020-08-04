@@ -8,11 +8,11 @@ import java.io.Serializable;
 public class EmployeeDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "detailsId")
+    @Column(name = "id_details")
     private Long id;
-    @Column(name = "transactionsCount")
+    @Column(name = "transactions_count")
     private int transactionsCount;
-    @Column(name = "sumCostTrans")
+    @Column(name = "sum_cost_trans")
     private float sumCostTrans;
 
     public EmployeeDetails(int transactionsCount, float sumCostTrans) {

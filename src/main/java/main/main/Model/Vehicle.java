@@ -11,19 +11,19 @@ public class Vehicle implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vehicleId")
+    @Column(name = "id_vehicle")
     private Long id;
-    @Column(name = "vehicleType", nullable = false)
+    @Column(name = "vehicle_type", nullable = false)
     private String vehicleType;
-    @Column(name = "registrationNumber", nullable = false)
+    @Column(name = "registration_number", nullable = false)
     private String registerNr;
-    @Column(name = "vehicleCapacity", nullable = false)
+    @Column(name = "vehicle_capacity", nullable = false)
     private float capacity;
-    @Column(name = "reviewDate", nullable = false)
+    @Column(name = "review_date", nullable = false)
     private String reviewDate;
-    @Column(name = "vehicleBrand", nullable = false)
+    @Column(name = "vehicle_brand", nullable = false)
     private String brand;
-    @Column(name = "insuranceDate", nullable = false)
+    @Column(name = "insurance_date", nullable = false)
     private String insuranceDate;
     @OneToMany(mappedBy = "vehicle")
     private List<Transaction> transactions;

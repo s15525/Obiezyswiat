@@ -9,25 +9,25 @@ public class Transaction implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transactionId")
+    @Column(name = "id_transaction")
     private Long id;
-    @Column(name = "companyName", nullable = false)
+    @Column(name = "company_name", nullable = false)
     private String companyName;
     @Column(name = "bid", nullable = false)
     private float bid;
     @Column(name = "route", nullable = false)
     private String route;
-    @Column(name = "loadingPlace", nullable = false)
+    @Column(name = "loading_place", nullable = false)
     private String loadingPlace;
-    @Column(name = "unloadingPlace", nullable = false)
+    @Column(name = "unloading_place", nullable = false)
     private String unloadingPlace;
 
     @ManyToOne
-    @JoinColumn(name = "employeeId")
+    @JoinColumn(name = "id_employee")
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "vehicleId")
+    @JoinColumn(name = "id_vehicle")
     private Vehicle vehicle;
 
     public Transaction(String companyName, float bid, String route, String loadingPlace, String unloadingPlace) {

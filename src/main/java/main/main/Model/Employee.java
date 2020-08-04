@@ -10,11 +10,11 @@ public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employeeId")
+    @Column(name = "id_employee")
     private Long id;
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
     @Column(name = "salary", nullable = false)
     private float salary;
@@ -24,6 +24,9 @@ public class Employee implements Serializable {
     private List<Transaction> transactions;
     @OneToOne
     private EmployeeDetails employeeDetails;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
     Employee(){}
 
