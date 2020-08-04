@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link href="../static/css/homePage.css" th:href="@{/css/homePage.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Obierzyswiat</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home page<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Apply transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Available transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Map Driver</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Vehicle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Employee</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- table left site -->
+<div class="tables">
+    <div class="tables-left-site">
+        <p class="lead">Vehicle</p>
+        <div class="one-table">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Column heading</th>
+                    <th scope="col">Column heading</th>
+                    <th scope="col">Column heading</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Default</th>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="lead">Transaction</p>
+        <div class="one-table">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Column heading</th>
+                    <th scope="col">Column heading</th>
+                    <th scope="col">Column heading</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Default</th>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="lead">Rank driver's</p>
+        <div class="one-table">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Column heading</th>
+                    <th scope="col">Column heading</th>
+                    <th scope="col">Column heading</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Default</th>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="table-right-site">
+        <p class="lead">Message</p>
+        <div class="message-table">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Default</th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
