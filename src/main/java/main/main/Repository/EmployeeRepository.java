@@ -10,5 +10,4 @@ import java.util.List;
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     List<Employee> findAllBySalary(float salary); //To to samo co Select * FROM employee where salary = $salary;
 
-    Employee findOne(Long id);
 }

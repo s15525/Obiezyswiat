@@ -1,6 +1,7 @@
 .tables{
     display: flex;
     justify-content: space-between;
+    padding: 5px;
 }
 .tables-left-site{
     display: flex;
@@ -14,5 +15,5 @@
 }
 .one-table{
     overflow-y: auto;
-    height: 130px;
+    height: 200px;
 }

@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Configuration
-//@EnableAutoConfiguration
-//@ComponentScan({"main.main.Repository","main.main.Controller"})
 @SpringBootApplication
 public class InzynierkaSpringBootApplication {
     public static void main(String[] args) {
@@ -50,14 +47,14 @@ public class InzynierkaSpringBootApplication {
 //        transactions.get(3).setVehicle(vehicles.get(1));
 //
 //        List<EmployeeDetails> employeeDetails = new ArrayList<>();
-//
-//
-//      //  employees.get(0).setEmployeeDetails(employeeDetails.get(0));
-//      //  employees.get(1).setEmployeeDetails(employeeDetails.get(1));
-//
-//     //   EmpolyeeDetailsRepository empolyeeDetailsRepository = ctx.getBean(EmpolyeeDetailsRepository.class);
-//      //  employeeDetails.forEach(empolyeeDetailsRepository::save);
-//
+
+
+      //  employees.get(0).setEmployeeDetails(employeeDetails.get(0));
+      //  employees.get(1).setEmployeeDetails(employeeDetails.get(1));
+
+     //   EmpolyeeDetailsRepository empolyeeDetailsRepository = ctx.getBean(EmpolyeeDetailsRepository.class);
+      //  employeeDetails.forEach(empolyeeDetailsRepository::save);
+
 //        EmployeeRepository employeeRepository = ctx.getBean(EmployeeRepository.class);
 //        employees.forEach(employeeRepository::save);
 //
@@ -69,11 +66,11 @@ public class InzynierkaSpringBootApplication {
 //
 //        List<Vehicle> vehicles1 = vehicleRepository.findAllByBrand("Volvo");
 //        vehicles1.forEach(System.out::println);
-//
-//      //  transactionRepository.namesForSalaryAsc(2)
-//        //        .forEach(System.out::println);
-//
-//
+
+      //  transactionRepository.namesForSalaryAsc(2)
+        //        .forEach(System.out::println);
+
+
 //        ctx.close();
     }
 }
