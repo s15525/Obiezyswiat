@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Vehicle</title>
     <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
-    <link href="../static/css/acceptTransaction.css" th:href="@{/css/homePage.css}" rel="stylesheet"/>
+    <link href="../static/css/employee.css" th:href="@{/css/employee.css}" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,7 +19,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Home page<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="#">Apply transaction</a>
             </li>
             <li class="nav-item">
@@ -28,7 +28,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Map Driver</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="#">Vehicle</a>
             </li>
             <li class="nav-item">
@@ -37,8 +37,8 @@
         </ul>
     </div>
 </nav>
-<div class="transaction">
-    
+<div class="box">
+    <p class="lead">Vehicle</p>
     <div class="table">
         <table class="table table-hover">
             <thead>
@@ -73,24 +73,59 @@
                 <td>Column content</td>
             </tr>
             </tbody>
+            <tbody>
+            <tr>
+                <th scope="row">Default</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <th scope="row">Default</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <th scope="row">Default</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <th scope="row">Default</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <th scope="row">Default</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <th scope="row">Default</th>
+                <td>Column content</td>
+                <td>Column content</td>
+                <td>Column content</td>
+            </tr>
+            </tbody>
         </table>
     </div>
-    <div class="box">
-        <div class="driver-description-box">
-            <div class="form-group">
-                <label for="exampleSelect1">Driver</label>
-                <select class="form-control" id="exampleSelect1">
-                    <option>Staszek</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleTextarea">Description of transaction</label>
-                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-            </div>
-        </div>
-        <div class="buttons-box">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+    <div class="buttons-box">
+        <button type="button" class="btn btn-primary">Add vehicle</button>
+        <button type="button" class="btn btn-primary">Edit vehicle</button>
     </div>
 </div>
 </body>
