@@ -1,76 +1,95 @@
 package main.main;
 
 import main.main.Model.*;
-import main.main.Repository.EmployeeRepository;
-import main.main.Repository.EmpolyeeDetailsRepository;
-import main.main.Repository.TransactionRepository;
-import main.main.Repository.VehicleRepository;
+import main.main.Service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
 
 @SpringBootApplication
 public class InzynierkaSpringBootApplication {
+    private static UserService userService;
+    private static EmployeeService employeeService;
+    private static VehicleService vehicleService;
+    private static TransactionService transactionService;
+    private static SubscriptionService subscriptionService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    @Autowired
+    public void setVehicleService(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
+
+    @Autowired
+    public void setTransactionService(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
+
+    @Autowired
+    public void setSubscriptionService(SubscriptionService subscriptionService) {
+        this.subscriptionService = subscriptionService;
+    }
+
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx =
                 SpringApplication.run(InzynierkaSpringBootApplication.class, args);
-//        List<Employee> employees = new ArrayList<>();
-//        employees.add(new Employee("Jan", "Nowak", 5000f, "Kierowca"));
-//        employees.add(new Employee("Piotr", "Duda", 5500f, "Kierowca"));
-//
-//        List<Vehicle> vehicles = new ArrayList<>();
-//        vehicles.add(new Vehicle(VehicleType.Truck, "WE4512", 5000f, "22", "Volvo", "22"));
-//        vehicles.add(new Vehicle(VehicleType.Truck, "WE5012", 5010f, "22", "Volvo", "222"));
-//
-//        List<Transaction> transactions = new ArrayList<>();
-//        transactions.add(new Transaction("Ekipa", 500f, "nie wiem po co ta zmienna chyba :dd", "Warszawa", "Krakow"));
-//        transactions.add(new Transaction("Ekipa", 10000f, "koks dla friza", "Warszawa", "Krakow"));
-//        transactions.add(new Transaction("Ekipa", 500f, "nie wiem po co ta zmienna chyba :dd", "Warszawa", "Krakow"));
-//        transactions.add(new Transaction("Ekipa", 10000f, "koks dla friza", "Warszawa", "Krakow"));
-//        transactions.add(new Transaction("MajorKonon", 1000000f, "Asterka boza?", "Warszawa", "Bialystok"));
-//        transactions.get(0).setEmployee(employees.get(0));
-//        transactions.get(1).setEmployee(employees.get(1));
-//        transactions.get(0).setVehicle(vehicles.get(0));
-//        transactions.get(1).setVehicle(vehicles.get(1));
-//        transactions.get(2).setEmployee(employees.get(0));
-//        transactions.get(3).setEmployee(employees.get(1));
-//        transactions.get(2).setVehicle(vehicles.get(0));
-//        transactions.get(3).setVehicle(vehicles.get(1));
-//
-//        List<EmployeeDetails> employeeDetails = new ArrayList<>();
 
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList.add(new Transaction("Xayoo industries", 500f, "costam", "Warszawa", "Krakow"));
+        transactionList.add(new Transaction("Essasto", 50f, "aaaa", "Warszawa", "Krakow"));
+        transactionList.add(new Transaction("Rashfordzik", 50000f, "kozak", "Warszawa", "Krakow"));
 
-      //  employees.get(0).setEmployeeDetails(employeeDetails.get(0));
-      //  employees.get(1).setEmployeeDetails(employeeDetails.get(1));
+        transactionService.addTransactions(transactionList);
 
-     //   EmpolyeeDetailsRepository empolyeeDetailsRepository = ctx.getBean(EmpolyeeDetailsRepository.class);
-      //  employeeDetails.forEach(empolyeeDetailsRepository::save);
+        List<Vehicle> vehicleList = new ArrayList<>();
+        vehicleList.add(new Vehicle(VehicleType.Truck,  "WOR1231", 5000f, "01/01/2021", "Volvo", "05/05/2222"));
+        vehicleList.add(new Vehicle(VehicleType.Van,  "WOR1121", 500f, "01/01/2021", "Polonez", "05/05/2222"));
+        vehicleList.add(new Vehicle(VehicleType.Truck,  "WOR66666", 5000f, "01/01/2021", "Volvo", "05/05/2222"));
 
-//        EmployeeRepository employeeRepository = ctx.getBean(EmployeeRepository.class);
-//        employees.forEach(employeeRepository::save);
-//
-//        VehicleRepository vehicleRepository = ctx.getBean(VehicleRepository.class);
-//        vehicles.forEach(vehicleRepository::save);
-//
-//        TransactionRepository transactionRepository = ctx.getBean(TransactionRepository.class);
-//        transactions.forEach(transactionRepository::save);
-//
-//        List<Vehicle> vehicles1 = vehicleRepository.findAllByBrand("Volvo");
-//        vehicles1.forEach(System.out::println);
+        vehicleService.addVehicles(vehicleList);
 
-      //  transactionRepository.namesForSalaryAsc(2)
-        //        .forEach(System.out::println);
+        List<User> userList = new ArrayList<>();
+        userList.add(new User("Lukas", "Tolpenko", "lodovelove@wp.pl", "kozackie", "jutro"));
+        userList.add(new User("Piotr", "Kotu", "kozak@wp.pl", "mocne123", "dzis"));
 
+        List<Subscription> subscriptionList = new ArrayList<>();
+        subscriptionList.add(new Subscription("Premium fchuj", 50000f, 32));
+        subscriptionList.add(new Subscription("Medium rare", 500f, 32));
+        subscriptionList.add(new Subscription("Darmowa (dla biedakow)", 0, 1000));
 
-//        ctx.close();
+        subscriptionService.addSubscriptions(subscriptionList);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, subscriptionList.get(0).getLength()); // dodaje dlugosc subskrypcji do dzisiejszej daty
+        DateFormat date = DateFormat.getDateInstance(); //formatuje do czytelnej daty
+
+        userList.get(0).setSubscription(subscriptionList.get(0));
+        userList.get(0).setSubscriptionEndDate(date.format(calendar.getTime()));
+        userService.addUsers(userList);
+
+        Employee employee = new Employee("Adam", "Robota", 2500f, "Kierowca?");
+
+        employeeService.addEmployee(employee, new EmployeeDetails(0, 0f));
+
+        transactionService.assignTransaction(transactionList.get(0), employee, vehicleList.get(0));
+        transactionService.assignTransaction(transactionList.get(1), employee, vehicleList.get(0));
+
+        ctx.close();
     }
 }

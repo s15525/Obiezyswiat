@@ -30,6 +30,8 @@ public class Transaction implements Serializable {
     @JoinColumn(name = "id_vehicle")
     private Vehicle vehicle;
 
+    public Transaction(){}
+
     public Transaction(String companyName, float bid, String route, String loadingPlace, String unloadingPlace) {
         this.companyName = companyName;
         this.bid = bid;

@@ -17,13 +17,18 @@ public class User implements Serializable {
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(nullable = false)
     @Email
+    @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
     @Column(name = "birth_date", nullable = false)
     private String birthDate;
+    private String subscriptionEndDate;
+
+    @OneToOne
+    private Subscription subscription;
+
     @OneToMany(mappedBy = "user")
     List<Employee> employees;
 
@@ -85,6 +90,30 @@ public class User implements Serializable {
         this.employees = employees;
     }
 
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getSubscriptionEndDate() {
+        return subscriptionEndDate;
+    }
+
+    public void setSubscriptionEndDate(String subscriptionEndDate) {
+        this.subscriptionEndDate = subscriptionEndDate;
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -93,6 +122,9 @@ public class User implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", subscriptionEndDate='" + subscriptionEndDate + '\'' +
+                ", employees=" + employees +
                 '}';
     }
 }

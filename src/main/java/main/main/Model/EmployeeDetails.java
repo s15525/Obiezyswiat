@@ -15,6 +15,8 @@ public class EmployeeDetails implements Serializable {
     @Column(name = "sum_cost_trans")
     private float sumCostTrans;
 
+    public EmployeeDetails(){}
+
     public EmployeeDetails(int transactionsCount, float sumCostTrans) {
         this.transactionsCount = transactionsCount;
         this.sumCostTrans = sumCostTrans;

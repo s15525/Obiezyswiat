@@ -25,10 +25,11 @@ public class Vehicle implements Serializable {
     private String brand;
     @Column(name = "insurance_date", nullable = false)
     private String insuranceDate;
+
     @OneToMany(mappedBy = "vehicle")
     private List<Transaction> transactions;
 
-    Vehicle(){}
+    public Vehicle(){}
 
     public Vehicle(VehicleType vehicleType, String registerNr, float capacity, String reviewDate, String brand, String insuranceDate) {
         this.vehicleType = String.valueOf(vehicleType);

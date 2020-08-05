@@ -2,13 +2,11 @@ package main.main.Service;
 
 import main.main.Model.Employee;
 import main.main.Model.EmployeeDetails;
-import main.main.Model.Transaction;
 import main.main.Repository.EmployeeDetailsRepository;
 import main.main.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -29,7 +27,7 @@ public class EmployeeService {
     public void addEmployee(Employee employee, EmployeeDetails employeeDetails){
         employee.setEmployeeDetails(employeeDetails);
 
-        employeeRepository.save(employee);
         employeeDetailsRepository.save(employeeDetails);
+        employeeRepository.save(employee);
     }
 }

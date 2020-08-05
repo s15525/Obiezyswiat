@@ -2,6 +2,7 @@ package main.main.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,17 +25,19 @@ public class Employee implements Serializable {
     private List<Transaction> transactions;
     @OneToOne
     private EmployeeDetails employeeDetails;
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
 
-    Employee(){}
+    public Employee(){}
 
     public Employee(String firstName, String lastName, float salary, String position) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.position = position;
+        this.transactions = new ArrayList<>();
     }
 
     public Long getId() {
@@ -93,6 +96,14 @@ public class Employee implements Serializable {
         this.employeeDetails = employeeDetails;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -101,6 +112,9 @@ public class Employee implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", salary=" + salary +
                 ", position='" + position + '\'' +
+                ", transactions=" + transactions +
+                ", employeeDetails=" + employeeDetails +
+                ", user=" + user +
                 '}';
     }
 }
