@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Vehicle</title>
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link href="../static/css/register.css" th:href="@{/css/register.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Obierzyswiat</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home page<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Apply transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Available transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Map Driver</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Vehicle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Employee</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="register-container">
+    <div class="data-column">
+        <div class="small-text">
+            <p class="lead">Add new Employee</p>
+            <div class="form-group">
+                <label for="vehicle-type">Enter Vehicle type</label>
+                <select class="form-control" id="vehicle-type">
+                    <option>1</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="addInputIdNumber">Id Number Vehicle</label>
+                <input type="text" class="form-control" id="addInputIdNumber" aria-describedby="idnumberHelp"
+                       placeholder="Enter Id Number Vehicle">
+            </div>
+            <div class="form-group">
+                <label for="addInputCapacity">Capacity</label>
+                <input type="text" class="form-control" id="addInputCapacity" aria-describedby="capacityHelp"
+                       placeholder="Enter Capacity">
+            </div>
+            <div class="form-group">
+                <label for="addInputInspection">Date of inspection</label>
+                <input type="text" class="form-control" id="addInputInspection" aria-describedby="inspectionHelp"
+                       placeholder="Enter date of inspection">
+            </div>
+            <div class="form-group">
+                <label for="brand-type">Enter car brand</label>
+                <select class="form-control" id="brand-type">
+                    <option>1</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="addInputInsurance">Date of Insurance</label>
+                <input type="text" class="form-control" id="addInputInsurance" aria-describedby="inspectionHelp"
+                       placeholder="Enter date of Insurance">
+            </div>
+        </div>
+        <div class="button-flex">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
