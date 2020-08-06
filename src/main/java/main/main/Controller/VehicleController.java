@@ -1,19 +1,25 @@
 package main.main.Controller;
 
+import main.main.Model.Employee;
 import main.main.Model.Vehicle;
 import main.main.Model.VehicleType;
+import main.main.validatingforminput.RegisterForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.validation.Valid;
 
 @Controller
-public class VehicleController {
+public class VehicleController implements WebMvcConfigurer {
 
-    @GetMapping("/vehicle")
-    public String vehicle(Model model){
-        Vehicle vehicle = new Vehicle(VehicleType.Truck, "WE4512", 5000f, "22", "Volvo", "22");
-        model.addAttribute("vehicle",vehicle);
-        return "vehicle";
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/results").setViewName("login");
     }
 
     @GetMapping("/")
@@ -22,7 +28,17 @@ public class VehicleController {
     }
 
     @GetMapping("/register")
-    public String register(Model model){
+        public String register(RegisterForm registerForm){
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String checkRegisterForm(@Valid RegisterForm registerForm, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            return "register";
+        }
+
+        return "redirect:/";
     }
 }
