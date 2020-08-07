@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -34,11 +35,11 @@ public class VehicleController implements WebMvcConfigurer {
 
     @PostMapping("/register")
     public String checkRegisterForm(@Valid RegisterForm registerForm, BindingResult bindingResult){
-
+        //registerForm object with value's form
         if (bindingResult.hasErrors()){
             return "register";
         }
 
-        return "redirect:/";
+        return "redirect:/results";
     }
 }
