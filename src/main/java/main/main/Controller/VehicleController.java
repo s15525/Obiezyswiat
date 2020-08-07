@@ -3,6 +3,7 @@ package main.main.Controller;
 import main.main.Model.Employee;
 import main.main.Model.Vehicle;
 import main.main.Model.VehicleType;
+import main.main.validatingforminput.LoginForm;
 import main.main.validatingforminput.RegisterForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,19 @@ public class VehicleController implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/results").setViewName("login");
+        //Place for after login controller
     }
 
     @GetMapping("/")
     String entry(){
         return "login";
+    }
+
+    @PostMapping("/")
+    String checkPassword(LoginForm loginForm, BindingResult bindingResult ){
+        //TODO
+
+        return "redirect:...";
     }
 
     @GetMapping("/register")
