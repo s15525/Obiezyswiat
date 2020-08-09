@@ -1,8 +1,10 @@
 package main.main.Controller;
 
 import main.main.Model.Employee;
+import main.main.Model.User;
 import main.main.Model.Vehicle;
 import main.main.Model.VehicleType;
+import main.main.Service.UserService;
 import main.main.validatingforminput.LoginForm;
 import main.main.validatingforminput.RegisterForm;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,9 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 @Controller
 public class VehicleController implements WebMvcConfigurer {
@@ -26,7 +31,7 @@ public class VehicleController implements WebMvcConfigurer {
     }
 
     @GetMapping("/")
-    String entry(){
+    String entry(LoginForm loginForm){
         return "login";
     }
 
@@ -34,7 +39,7 @@ public class VehicleController implements WebMvcConfigurer {
     String checkPassword(LoginForm loginForm, BindingResult bindingResult ){
         //TODO
 
-        return "redirect:...";
+        return "login";
     }
 
     @GetMapping("/register")
@@ -48,6 +53,11 @@ public class VehicleController implements WebMvcConfigurer {
         if (bindingResult.hasErrors()){
             return "register";
         }
+        UserService userService = new UserService();
+        System.out.println(registerForm.getFirstName()+","+registerForm.getSurname()+","+registerForm.getEmail()
+                +","+registerForm.getPassword()+","+registerForm.getBrithDate());
+        userService.addUser(new User(registerForm.getFirstName(),registerForm.getSurname(),registerForm.getEmail()
+                ,registerForm.getPassword(),registerForm.getBrithDate()));
 
         return "redirect:/results";
     }
