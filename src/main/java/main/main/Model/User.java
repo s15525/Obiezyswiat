@@ -34,6 +34,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     List<Employee> employees;
 
+    @OneToOne
+    private Role role;
+
     public User(){}
 
     public User(String firstName, String lastName, @Email String email, String password, String birthDate) {
@@ -116,6 +119,14 @@ public class User implements Serializable {
         this.subscription = subscription;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -126,7 +137,9 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", birthDate='" + birthDate + '\'' +
                 ", subscriptionEndDate='" + subscriptionEndDate + '\'' +
+                ", subscription=" + subscription +
                 ", employees=" + employees +
+                ", role=" + role +
                 '}';
     }
 }

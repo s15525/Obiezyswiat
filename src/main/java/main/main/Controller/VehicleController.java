@@ -24,7 +24,7 @@ import java.util.List;
 @Controller
 public class VehicleController implements WebMvcConfigurer {
 
-    @Override
+  /*  @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/results").setViewName("login");
         //Place for after login controller
@@ -60,5 +60,5 @@ public class VehicleController implements WebMvcConfigurer {
                 ,registerForm.getPassword(),registerForm.getBrithDate()));
 
         return "redirect:/results";
-    }
+    }*/
 }
