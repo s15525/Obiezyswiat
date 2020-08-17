@@ -56,6 +56,10 @@ public class TransactionService {
         transactionRepository.save(transaction);
     }
 
+    public List<Transaction> showAllTransactions(){
+        return transactionRepository.findAll();
+    }
+
     //Ta metoda zeby dodawac odrazu cala liste a nie pojedynczo to testow tylko jak cos mi potrzebna
     public void addTransactions(List<Transaction> transactionList){
         transactionList.forEach(transactionRepository::save);

@@ -21,6 +21,8 @@ public class Transaction implements Serializable {
     private String loadingPlace;
     @Column(name = "unloading_place", nullable = false)
     private String unloadingPlace;
+    @Column(nullable = false)
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "id_employee")
@@ -32,12 +34,13 @@ public class Transaction implements Serializable {
 
     public Transaction(){}
 
-    public Transaction(String companyName, float bid, String route, String loadingPlace, String unloadingPlace) {
+    public Transaction(String companyName, float bid, String route, String loadingPlace, String unloadingPlace, String description) {
         this.companyName = companyName;
         this.bid = bid;
         this.route = route;
         this.loadingPlace = loadingPlace;
         this.unloadingPlace = unloadingPlace;
+        this.description = description;
     }
 
     public Long getId() {
@@ -104,14 +107,13 @@ public class Transaction implements Serializable {
         this.vehicle = vehicle;
     }
 
-    public void realiseTransaction(){
-
+    public String getDescription() {
+        return description;
     }
 
-    public void deleteTransaction(){
-
+    public void setDescription(String description) {
+        this.description = description;
     }
-
 
     @Override
     public String toString() {
@@ -122,7 +124,9 @@ public class Transaction implements Serializable {
                 ", route='" + route + '\'' +
                 ", loadingPlace='" + loadingPlace + '\'' +
                 ", unloadingPlace='" + unloadingPlace + '\'' +
+                ", description='" + description + '\'' +
                 ", employee=" + employee +
+                ", vehicle=" + vehicle +
                 '}';
     }
 }

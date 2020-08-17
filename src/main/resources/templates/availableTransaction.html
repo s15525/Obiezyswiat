@@ -17,22 +17,22 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home page<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home page<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Apply transaction</a>
             </li>
             <li class="nav-item  active">
-                <a class="nav-link" href="#">Available transaction</a>
+                <a class="nav-link" href="/allTransactions">Available transaction</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Map Driver</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Vehicle</a>
+                <a class="nav-link" href="/allVehicles">Vehicle</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Employee</a>
+                <a class="nav-link" href="/allEmployees">Employee</a>
             </li>
         </ul>
     </div>
@@ -43,33 +43,21 @@
         <thead>
         <tr>
             <th scope="col">Type</th>
-            <th scope="col">Column heading</th>
-            <th scope="col">Column heading</th>
-            <th scope="col">Column heading</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Bid</th>
+            <th scope="col">Route</th>
+            <th scope="col">Loading Place</th>
+            <th scope="col">Unloading Place</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody th:each="transaction: ${transactionList}">
         <tr>
             <th scope="row">Default</th>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-        </tr>
-        </tbody>
-        <tbody>
-        <tr>
-            <th scope="row">Default</th>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-        </tr>
-        </tbody>
-        <tbody>
-        <tr>
-            <th scope="row">Default</th>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
+            <td th:text="${transaction.companyName}"></td>
+            <td th:text="${transaction.bid}"></td>
+            <td th:text="${transaction.route}"></td>
+            <td th:text="${transaction.loadingPlace}"></td>
+            <td th:text="${transaction.unloadingPlace}"></td>
         </tr>
         </tbody>
     </table>

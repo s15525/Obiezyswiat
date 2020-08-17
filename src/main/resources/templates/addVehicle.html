@@ -17,66 +17,70 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home page<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home page<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Apply transaction</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Available transaction</a>
+                <a class="nav-link" href="/allTransactions">Available transaction</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Map Driver</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Vehicle</a>
+                <a class="nav-link" href="/allVehicles">Vehicle</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Employee</a>
+                <a class="nav-link" href="/allEmployees">Employee</a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="register-container">
     <div class="data-column">
-        <div class="small-text">
-            <p class="lead">Add new Employee</p>
-            <div class="form-group">
-                <label for="vehicle-type">Enter Vehicle type</label>
-                <select class="form-control" id="vehicle-type">
-                    <option>1</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="addInputIdNumber">Id Number Vehicle</label>
-                <input type="text" class="form-control" id="addInputIdNumber" aria-describedby="idnumberHelp"
-                       placeholder="Enter Id Number Vehicle">
-            </div>
-            <div class="form-group">
-                <label for="addInputCapacity">Capacity</label>
-                <input type="text" class="form-control" id="addInputCapacity" aria-describedby="capacityHelp"
-                       placeholder="Enter Capacity">
-            </div>
-            <div class="form-group">
-                <label for="addInputInspection">Date of inspection</label>
-                <input type="text" class="form-control" id="addInputInspection" aria-describedby="inspectionHelp"
-                       placeholder="Enter date of inspection">
-            </div>
-            <div class="form-group">
-                <label for="brand-type">Enter car brand</label>
-                <select class="form-control" id="brand-type">
-                    <option>1</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="addInputInsurance">Date of Insurance</label>
-                <input type="text" class="form-control" id="addInputInsurance" aria-describedby="inspectionHelp"
-                       placeholder="Enter date of Insurance">
-            </div>
-        </div>
+        <form action="#" th:action="@{/addVehicle}" th:object="${vehicle}" method="post">
+            <div class="small-text">
+                <p class="lead">Add new Employee</p>
+                <div class="form-group">
+                    <label for="vehicle-type">Enter Vehicle type</label>
+                    <select class="form-control" id="vehicle-type" th:field="*{vehicleType}">
+                        <option th:value="Truck" th:text="Truck"></option>
+                        <option th:value="Van" th:text="Van"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addInputIdNumber">Id Number Vehicle</label>
+                    <input type="text" class="form-control" id="addInputIdNumber" aria-describedby="idnumberHelp"
+                           placeholder="Enter Id Number Vehicle" th:field="*{registerNr}">
+                </div>
+                <div class="form-group">
+                    <label for="addInputCapacity">Capacity</label>
+                    <input type="text" class="form-control" id="addInputCapacity" aria-describedby="capacityHelp"
+                           placeholder="Enter Capacity" th:field="*{capacity}">
+                </div>
+                <div class="form-group">
+                    <label for="addInputInspection">Date of inspection</label>
+                    <input type="date" class="form-control" id="addInputInspection" aria-describedby="inspectionHelp"
+                           placeholder="Enter date of inspection" th:field="*{reviewDate}">
+                </div>
+                <div class="form-group">
+                    <label for="brand-type">Enter car brand</label>
+                    <select class="form-control" id="brand-type" th:field="*{brand}">
+                        <option th:value="Volvo" th:text="Volvo"></option>
+                        <option th:value="Star" th:text="Star"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addInputInsurance">Date of Insurance</label>
+                    <input type="date" class="form-control" id="addInputInsurance" aria-describedby="inspectionHelp"
+                           placeholder="Enter date of Insurance" th:field="*{insuranceDate}">
+                </div>
+             </div>
         <div class="button-flex">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+        </form>
     </div>
 </div>
 </body>

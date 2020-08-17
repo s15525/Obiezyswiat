@@ -21,6 +21,10 @@ public class VehicleService {
         vehicleRepository.save(vehicle);
     }
 
+    public List<Vehicle> showAllVehicles(){
+        return (List<Vehicle>) vehicleRepository.findAll();
+    }
+
     public void addVehicles(List<Vehicle> vehicleList){
         vehicleList.forEach(vehicleRepository::save);
     }

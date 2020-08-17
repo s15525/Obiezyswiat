@@ -7,6 +7,8 @@ import main.main.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class EmployeeService {
@@ -29,5 +31,9 @@ public class EmployeeService {
 
         employeeDetailsRepository.save(employeeDetails);
         employeeRepository.save(employee);
+    }
+
+    public List<Employee> showAllEmployees(){
+        return (List<Employee>) employeeRepository.findAll();
     }
 }

@@ -17,22 +17,22 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home page<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home page<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Apply transaction</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Available transaction</a>
+                <a class="nav-link" href="/allTransactions">Available transaction</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Map Driver</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Vehicle</a>
+                <a class="nav-link" href="/allVehicles">Vehicle</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Employee</a>
+                <a class="nav-link" href="/allEmployees">Employee</a>
             </li>
         </ul>
     </div>
@@ -44,88 +44,30 @@
             <thead>
             <tr>
                 <th scope="col">Type</th>
-                <th scope="col">Column heading</th>
-                <th scope="col">Column heading</th>
-                <th scope="col">Column heading</th>
+                <th scope="col">Vehicle Type</th>
+                <th scope="col">Vehicle Brand</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Registration Number</th>
+                <th scope="col">Review Date</th>
+                <th scope="col">Insurance Date</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="vehicle: ${vehiclesList}">
                 <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+                <td th:text="${vehicle.vehicleType}"></td>
+                <td th:text="${vehicle.brand}"></td>
+                <td th:text="${vehicle.capacity}"></td>
+                <td th:text="${vehicle.registerNr}"></td>
+                <td th:text="${vehicle.reviewDate}"></td>
+                <td th:text="${vehicle.insuranceDate}"></td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="buttons-box">
-        <button type="button" class="btn btn-primary">Add vehicle</button>
-        <button type="button" class="btn btn-primary">Edit vehicle</button>
+        <a href="/addVehicle" type="button" class="btn btn-primary">Add vehicle</a>
+        <a type="button" class="btn btn-primary">Edit vehicle</a>
     </div>
 </div>
 </body>
