@@ -23,6 +23,7 @@ public class Employee implements Serializable {
     private String position;
     @OneToMany(mappedBy = "employee")
     private List<Transaction> transactions;
+
     @OneToOne
     private EmployeeDetails employeeDetails;
 

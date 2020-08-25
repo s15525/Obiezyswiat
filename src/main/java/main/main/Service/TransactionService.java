@@ -56,8 +56,12 @@ public class TransactionService {
         transactionRepository.save(transaction);
     }
 
-    public List<Transaction> showAllTransactions(){
-        return transactionRepository.findAll();
+    public List<Transaction> showInProgrssTransactions(){
+        return transactionRepository.getAllByEmployeeIsNotNull();
+    }
+
+    public List<Transaction> showAvailableTransactions(){
+        return transactionRepository.getAllByEmployeeIsNull();
     }
 
     //Ta metoda zeby dodawac odrazu cala liste a nie pojedynczo to testow tylko jak cos mi potrzebna

@@ -5,6 +5,7 @@ import main.main.Model.EmployeeDetails;
 import main.main.Repository.EmployeeDetailsRepository;
 import main.main.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,4 +37,6 @@ public class EmployeeService {
     public List<Employee> showAllEmployees(){
         return (List<Employee>) employeeRepository.findAll();
     }
+
+
 }

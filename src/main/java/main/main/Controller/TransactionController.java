@@ -2,6 +2,7 @@ package main.main.Controller;
 
 import main.main.Model.Employee;
 import main.main.Model.Transaction;
+import main.main.Service.EmployeeService;
 import main.main.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,21 +17,27 @@ import javax.validation.Valid;
 public class TransactionController {
 
     private TransactionService transactionService;
+    private EmployeeService employeeService;
 
     @Autowired
     public void setTransactionService(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
 
+    @Autowired
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
     @GetMapping("/allTransactions")
     public String showTransactions(Model model){
-        model.addAttribute("transactionList", transactionService.showAllTransactions());
+        model.addAttribute("transactionList", transactionService.showAvailableTransactions());
         return "availableTransaction";
     }
 
     @GetMapping("/acceptTransaction")
     public String applyTransaction(Model model){
-
+        model.addAttribute("transactionList", transactionService.showAvailableTransactions());
         return "acceptTransaction";
     }
 
@@ -38,6 +45,7 @@ public class TransactionController {
         if(bindingResult.hasErrors())
             return "acceptTransaction";
         else{
+
             return "homePage";
         }
     }
