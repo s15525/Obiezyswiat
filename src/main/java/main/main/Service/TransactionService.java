@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TransactionService {
@@ -67,5 +68,28 @@ public class TransactionService {
     //Ta metoda zeby dodawac odrazu cala liste a nie pojedynczo to testow tylko jak cos mi potrzebna
     public void addTransactions(List<Transaction> transactionList){
         transactionList.forEach(transactionRepository::save);
+    }
+
+    public Optional<Transaction> getOne(Long id){
+        return transactionRepository.findById(id);
+    }
+
+    public void assign(Transaction transaction, Long id){
+        Employee employee = employeeRepository.findById(id).get();
+        if(!employee.getTransactions().contains(transaction)){
+            transaction.setEmployee(employee);
+
+            List<Transaction> transactions = employee.getTransactions();
+            transactions.add(transaction);
+            employee.setTransactions(transactions);
+
+            EmployeeDetails employeeDetails = employeeDetailsRepository.getById(employee.getEmployeeDetails().getId());
+            employeeDetails.setSumCostTrans(employeeDetails.getSumCostTrans() + transaction.getBid());
+            employeeDetails.setTransactionsCount(employeeDetails.getTransactionsCount()+1);
+
+            employeeDetailsRepository.save(employeeDetails);
+            employeeRepository.save(employee);
+            transactionRepository.save(transaction);
+        }
     }
 }

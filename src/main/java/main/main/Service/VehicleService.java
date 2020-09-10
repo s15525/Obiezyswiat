@@ -1,20 +1,29 @@
 package main.main.Service;
 
+import main.main.Model.Transaction;
 import main.main.Model.Vehicle;
+import main.main.Repository.TransactionRepository;
 import main.main.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleService {
 
     private VehicleRepository vehicleRepository;
+    private TransactionRepository transactionRepository;
 
     @Autowired
     public void setVehicleRepository(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
+    }
+
+    @Autowired
+    public void setTransactionRepository(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
     }
 
     public void addVehicle(Vehicle vehicle){
@@ -27,5 +36,30 @@ public class VehicleService {
 
     public void addVehicles(List<Vehicle> vehicleList){
         vehicleList.forEach(vehicleRepository::save);
+    }
+
+    public Optional<Vehicle> getOne(Long id){
+        return vehicleRepository.findById(id);
+    }
+
+    public void updateVehicle(Vehicle vehicle){
+        Optional<Vehicle> oldVehicle = this.getOne(vehicle.getId());
+        oldVehicle.get().setVehicleType(vehicle.getVehicleType());
+        oldVehicle.get().setBrand(vehicle.getBrand());
+        oldVehicle.get().setCapacity(vehicle.getCapacity());
+        oldVehicle.get().setRegisterNr(vehicle.getRegisterNr());
+        oldVehicle.get().setReviewDate(vehicle.getReviewDate());
+        oldVehicle.get().setInsuranceDate(vehicle.getInsuranceDate());
+        vehicleRepository.save(oldVehicle.get());
+    }
+
+    public void deleteVehicle(Long id){
+        List<Transaction> transactionList = transactionRepository.findAllByVehicle(getOne(id).get());
+        for(Transaction transaction : transactionList){
+            transaction.setVehicle(null);
+            transaction.setVehicle(null); //to bedzie trzeba ladnie schowac
+        }
+        vehicleRepository.deleteById(id);
+        transactionList.forEach(transactionRepository::save);
     }
 }

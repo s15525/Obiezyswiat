@@ -4,7 +4,10 @@ import main.main.Model.Vehicle;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface VehicleRepository extends CrudRepository<Vehicle, Long> {
     List<Vehicle> findAllByBrand(String brand);
+
+    Optional<Vehicle> findById(Long id);
 }

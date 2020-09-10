@@ -1,5 +1,7 @@
 package main.main.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -26,6 +28,7 @@ public class Vehicle implements Serializable {
     @Column(name = "insurance_date", nullable = false)
     private String insuranceDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "vehicle")
     private List<Transaction> transactions;
 

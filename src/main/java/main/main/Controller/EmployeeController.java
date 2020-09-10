@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class EmployeeController {
@@ -43,5 +42,23 @@ public class EmployeeController {
             employeeService.addEmployee(employee, new EmployeeDetails(0, 0f));
             return "homePage";
         }
+    }
+
+    @GetMapping("/getOne")
+    @ResponseBody
+    public Optional<Employee> getOne(Long Id){
+        return employeeService.getOne(Id);
+    }
+
+    @RequestMapping("/update")
+    public String update(Employee employee){
+        employeeService.updateEmployee(employee);
+        return "redirect:/allEmployees";
+    }
+
+    @GetMapping("/delete")
+    public String deleteEmployee(Long Id){
+        employeeService.deleteEmployee(Id);
+        return "redirect:/allEmployees";
     }
 }

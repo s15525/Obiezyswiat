@@ -1,17 +1,15 @@
 package main.main.Controller;
 
-import main.main.Model.EmployeeDetails;
 import main.main.Model.Vehicle;
 import main.main.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class VehicleController {
@@ -42,5 +40,23 @@ public class VehicleController {
             vehicleService.addVehicle(vehicle);
             return "homePage";
         }
+    }
+
+    @GetMapping("/vehicle/getOne")
+    @ResponseBody
+    public Optional<Vehicle> getOne(Long Id){
+        return vehicleService.getOne(Id);
+    }
+
+    @RequestMapping("/vehicle/update")
+    public String update(Vehicle vehicle){
+        vehicleService.updateVehicle(vehicle);
+        return "redirect:/allVehicles";
+    }
+
+    @GetMapping("/vehicle/delete")
+    public String delete(Long id){
+        vehicleService.deleteVehicle(id);
+        return "redirect:/allVehicles";
     }
 }
