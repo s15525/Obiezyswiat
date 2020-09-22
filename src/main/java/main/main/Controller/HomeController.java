@@ -31,7 +31,8 @@ public class HomeController {
         this.vehicleService = vehicleService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/home" +
+            "")
     public String home(Model model){
         model.addAttribute("employeeList", employeeService.showAllEmployees());
         model.addAttribute("vehicleList", vehicleService.showAllVehicles());

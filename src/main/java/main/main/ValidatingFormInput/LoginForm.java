@@ -1,4 +1,4 @@
-package main.main.validatingforminput;
+package main.main.ValidatingFormInput;
 
 public class LoginForm {
     public String emailLogin;

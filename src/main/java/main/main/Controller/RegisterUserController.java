@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 @Controller
-public class UserController {
+public class RegisterUserController {
 
     private UserService userService;
 
@@ -27,7 +27,6 @@ public class UserController {
         model.addAttribute("user", new User());
         return "register";
     }
-
     @PostMapping("/register")
     public String addUser(@ModelAttribute @Valid User user, BindingResult bindingResult){
         if(bindingResult.hasErrors())

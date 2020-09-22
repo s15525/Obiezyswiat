@@ -1,5 +1,6 @@
 package main.main.Service;
 
+import main.main.Model.Employee;
 import main.main.Model.Role;
 import main.main.Model.Subscription;
 import main.main.Model.User;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -36,8 +38,8 @@ public class UserService {
         return new BCryptPasswordEncoder();
     }
 
-    public void addUser(User user){
-        if(roleRepository.findByRoleName(DEFAULT_ROLE) == null) {
+    public void addUser(User user) {
+        if (roleRepository.findByRoleName(DEFAULT_ROLE) == null) {
             roles.add(new Role("Client", "cos tam moze"));
             roles.add(new Role("Admin", "Wladza absolutna"));
             roles.forEach(roleRepository::save);
@@ -49,12 +51,21 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void addUsers(List<User> userList){
+    public void addUsers(List<User> userList) {
         userList.forEach(userRepository::save);
     }
 
-    public void assignSubscription(User user, Subscription subscription){
+    public void assignSubscription(User user, Subscription subscription) {
         user.setSubscription(subscription);
         userRepository.save(user);
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.getByEmail(email);
+    }
+
+    //TODO Password check
+    public boolean checkPassword(String formPassword, String userDbPassword) {
+        return passwordEncoder().matches(formPassword, userDbPassword);
     }
 }

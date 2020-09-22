@@ -26,7 +26,7 @@ public class User implements Serializable {
     private String lastName;
     @Email
     @Size(min=2, max=30)
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String email;
     //TODO password check
 //    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",
