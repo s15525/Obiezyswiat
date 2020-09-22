@@ -3,6 +3,7 @@ package main.main.Model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -15,13 +16,21 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     private Long id;
+    @Size(min=2, max=30)
+    @Pattern(regexp = "^[a-zA-Z]+", message = "Not Numbers Allow")
     @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Size(min=2, max=30)
+    @Pattern(regexp = "^[a-zA-Z]+", message = "Not Numbers Allow")
     @Column(name = "last_name", nullable = false)
     private String lastName;
     @Email
+    @Size(min=2, max=30)
     @Column(nullable = false)
     private String email;
+    //TODO password check
+//    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",
+//            message = "Minimum eight characters, at least one letter, one number and one special character")
     @Column(nullable = false)
     private String password;
     @Column(name = "birth_date", nullable = false)
