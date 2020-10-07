@@ -23,25 +23,29 @@ public class Employee implements Serializable {
     private float salary;
     @Column(name = "position", nullable = false)
     private String position;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     private List<Transaction> transactions;
-
     @OneToOne
+    @JoinColumn(name = "employee_details_id", referencedColumnName = "id_details")
     private EmployeeDetails employeeDetails;
+    @JsonIgnore
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.PERSIST)
+    private Vehicle vehicle;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
+
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName, float salary, String position) {
+    public Employee(String firstName, String lastName, float salary, String position, String userId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.position = position;
-        this.transactions = new ArrayList<>();
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -100,12 +104,20 @@ public class Employee implements Serializable {
         this.employeeDetails = employeeDetails;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     @Override
@@ -116,9 +128,7 @@ public class Employee implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", salary=" + salary +
                 ", position='" + position + '\'' +
-                ", transactions=" + transactions +
-                ", employeeDetails=" + employeeDetails +
-                ", user=" + user +
-                '}';
+                ", userId=" + userId +
+                ", transactions=" + transactions;
     }
 }

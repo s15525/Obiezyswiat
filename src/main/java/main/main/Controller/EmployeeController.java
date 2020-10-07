@@ -3,28 +3,33 @@ package main.main.Controller;
 import main.main.Model.Employee;
 import main.main.Model.EmployeeDetails;
 import main.main.Service.EmployeeService;
+import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Optional;
 
+@Secured("ROLE_USER")
 @Controller
+@RequestMapping("/employee")
 public class EmployeeController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
-    @Autowired
-    public void setEmployeeService(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
     @GetMapping("/allEmployees")
-    public String showEmployees(Model model){
-        model.addAttribute("employeeList", employeeService.showAllEmployees());
+    public String showEmployees(Model model, HttpServletRequest request){
+        KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
+        model.addAttribute("employeeList", employeeService.showEmployeesByUserId(principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject()));
         return "employee";
     }
 
@@ -35,10 +40,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/addEmployee")
-    public String addEmployee(@ModelAttribute @Valid Employee employee, BindingResult bindingResult){
+    public String addEmployee(@ModelAttribute @Valid Employee employee, BindingResult bindingResult, HttpServletRequest request){
         if(bindingResult.hasErrors()) {
             return "addEmployee";
         }else{
+            KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
+            String id = principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject();
+            employee.setUserId(id);// Pobranie id usera
             employeeService.addEmployee(employee, new EmployeeDetails(0, 0f));
             return "homePage";
         }
@@ -53,12 +61,12 @@ public class EmployeeController {
     @RequestMapping("/update")
     public String update(Employee employee){
         employeeService.updateEmployee(employee);
-        return "redirect:/allEmployees";
+        return "redirect:/employee/allEmployees";
     }
 
     @GetMapping("/delete")
     public String deleteEmployee(Long Id){
         employeeService.deleteEmployee(Id);
-        return "redirect:/allEmployees";
+        return "redirect:/employee/allEmployees";
     }
 }

@@ -1,10 +1,10 @@
 package main.main.Service;
 
+import main.main.Model.Employee;
 import main.main.Model.Transaction;
 import main.main.Model.Vehicle;
 import main.main.Repository.TransactionRepository;
 import main.main.Repository.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,20 +13,16 @@ import java.util.Optional;
 @Service
 public class VehicleService {
 
-    private VehicleRepository vehicleRepository;
-    private TransactionRepository transactionRepository;
+    private final VehicleRepository vehicleRepository;
+    private final TransactionRepository transactionRepository;
 
-    @Autowired
-    public void setVehicleRepository(VehicleRepository vehicleRepository) {
+    public VehicleService(VehicleRepository vehicleRepository, TransactionRepository transactionRepository) {
         this.vehicleRepository = vehicleRepository;
-    }
-
-    @Autowired
-    public void setTransactionRepository(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
     }
 
-    public void addVehicle(Vehicle vehicle){
+    public void addVehicle(Vehicle vehicle, Employee employee){
+        vehicle.setEmployee(employee);
         vehicleRepository.save(vehicle);
     }
 
@@ -34,8 +30,8 @@ public class VehicleService {
         return (List<Vehicle>) vehicleRepository.findAll();
     }
 
-    public void addVehicles(List<Vehicle> vehicleList){
-        vehicleList.forEach(vehicleRepository::save);
+    public List<Vehicle> showOurCompanyVehicles(String userId){
+        return vehicleRepository.findAllByEmployeeUserId(userId);
     }
 
     public Optional<Vehicle> getOne(Long id){

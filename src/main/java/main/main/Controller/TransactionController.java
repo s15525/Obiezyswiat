@@ -5,6 +5,7 @@ import main.main.Model.Transaction;
 import main.main.Service.EmployeeService;
 import main.main.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,19 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.validation.Valid;
 import java.util.Optional;
 
+@Secured("ROLE_USER")
 @Controller
+@RequestMapping("/transaction")
 public class TransactionController {
 
-    private TransactionService transactionService;
-    private EmployeeService employeeService;
+    private final TransactionService transactionService;
+    private final EmployeeService employeeService;
 
-    @Autowired
-    public void setTransactionService(TransactionService transactionService) {
+    public TransactionController(TransactionService transactionService, EmployeeService employeeService) {
         this.transactionService = transactionService;
-    }
-
-    @Autowired
-    public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
@@ -53,7 +51,7 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transaction/getOne")
+    @GetMapping("/getOne")
     @ResponseBody
     public Optional<Transaction> getOne(Long Id){
         System.out.println(Id+"---------------ID------------------");
@@ -61,10 +59,10 @@ public class TransactionController {
         return transactionService.getOne(Id);
     }
 
-    @RequestMapping("/transaction/assign")
+    @RequestMapping("/assign")
     public String assignTransaction(Transaction transaction, Long Id, Model model){
         model.addAttribute("employeeList", employeeService.showAllEmployees());
         transactionService.assign(transaction, Id);
-        return "redirect:/acceptTransaction";
+        return "redirect:/transaction/acceptTransaction";
     }
 }

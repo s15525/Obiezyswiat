@@ -34,7 +34,8 @@ public class Transaction implements Serializable {
 
     public Transaction(){}
 
-    public Transaction(String companyName, float bid, String route, String loadingPlace, String unloadingPlace, String description) {
+    public Transaction(String companyName, float bid, String route, String loadingPlace,
+                       String unloadingPlace, String description) {
         this.companyName = companyName;
         this.bid = bid;
         this.route = route;
@@ -125,8 +126,6 @@ public class Transaction implements Serializable {
                 ", loadingPlace='" + loadingPlace + '\'' +
                 ", unloadingPlace='" + unloadingPlace + '\'' +
                 ", description='" + description + '\'' +
-                ", employee=" + employee +
-                ", vehicle=" + vehicle +
                 '}';
     }
 }
