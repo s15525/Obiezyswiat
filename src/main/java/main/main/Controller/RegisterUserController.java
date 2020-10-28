@@ -1,3 +1,4 @@
+/*
 package main.main.Controller;
 
 import main.main.Model.User;
@@ -37,3 +38,4 @@ public class RegisterUserController {
         }
     }
 }
+*/

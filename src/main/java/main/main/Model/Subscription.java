@@ -15,15 +15,21 @@ public class Subscription implements Serializable {
     private String name;
     @Column(nullable = false)
     private float prize;
-    @Column(nullable = false)
-    private int length;
+    @Column(name = "start_date",nullable = false)
+    private String startDate;
+    @Column(name = "end_date", nullable = false)
+    private String endDate;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
     public Subscription(){}
 
-    public Subscription(String name, float prize, int length) {
+    public Subscription(String name, float prize, String startDate, String endDate, String userId) {
         this.name = name;
         this.prize = prize;
-        this.length = length;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -50,12 +56,28 @@ public class Subscription implements Serializable {
         this.prize = prize;
     }
 
-    public int getLength() {
-        return length;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -64,7 +86,9 @@ public class Subscription implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", prize=" + prize +
-                ", length=" + length +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

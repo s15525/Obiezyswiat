@@ -10,8 +10,7 @@ $(document).ready(function () {
                 $('.myForm #bid').val(transaction.bid);
                 $('.myForm #route').val(transaction.route);
                 $('.myForm #loadingPlace').val(transaction.loadingPlace);
-                $('.myForm #unloadingPlace').val(transaction.unloadingPlace);
-                $('.myForm #employeeId').val(employee.id);
+                $('.myForm #unloadingPlace').val(employee.firstName);
 
             });
             $('.myForm #exampleModal').modal();

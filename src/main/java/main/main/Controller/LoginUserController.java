@@ -1,3 +1,4 @@
+/*
 package main.main.Controller;
 
 import main.main.Model.User;
@@ -24,7 +25,7 @@ public class LoginUserController implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/results").setViewName("home");
+        registry.addViewController("/results").setViewName("homePage");
         //Place for after login controller
     }
 
@@ -47,8 +48,9 @@ public class LoginUserController implements WebMvcConfigurer {
                 bindingResult.rejectValue("password", "error.User", "This is not correct password for this account");
                 return "login";
             }else {
-                return "home";
+                return "homePage";
             }
         }
     }
 }
+*/

@@ -3,11 +3,10 @@ package main.main.Service;
 import main.main.Model.Employee;
 import main.main.Model.EmployeeDetails;
 import main.main.Model.Transaction;
+import main.main.Model.Vehicle;
 import main.main.Repository.EmployeeDetailsRepository;
 import main.main.Repository.EmployeeRepository;
 import main.main.Repository.TransactionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,22 +16,14 @@ import java.util.Optional;
 @Service
 public class EmployeeService {
 
-    private EmployeeRepository employeeRepository;
-    private EmployeeDetailsRepository employeeDetailsRepository;
-    private TransactionRepository transactionRepository;
+    private final EmployeeRepository employeeRepository;
+    private final EmployeeDetailsRepository employeeDetailsRepository;
+    private final TransactionRepository transactionRepository;
 
-    @Autowired
-    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, EmployeeDetailsRepository employeeDetailsRepository,
+                           TransactionRepository transactionRepository) {
         this.employeeRepository = employeeRepository;
-    }
-
-    @Autowired
-    public void setEmployeeDetailsRepository(EmployeeDetailsRepository employeeDetailsRepository) {
         this.employeeDetailsRepository = employeeDetailsRepository;
-    }
-
-    @Autowired
-    public void setTransactionRepository(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
     }
 
@@ -44,7 +35,11 @@ public class EmployeeService {
     }
 
     public List<Employee> showAllEmployees(){
-        return (List<Employee>) employeeRepository.findAll();
+        return employeeRepository.findAll();
+    }
+
+    public List<Employee> showEmployeesByUserId(String userId){
+        return employeeRepository.findAllByUserId(userId);
     }
 
     public void updateEmployee(Employee employee){
@@ -58,8 +53,18 @@ public class EmployeeService {
         employeeRepository.save(oldEmployee.get());
     }
 
+    public void updateEmployeeVehicle(Long userId, Vehicle vehicle){
+        Employee employee = employeeRepository.getOne(userId);
+        employee.setVehicle(vehicle);
+        employeeRepository.save(employee);
+    }
+
     public Optional<Employee> getOne(Long id){
         return employeeRepository.findById(id);
+    }
+
+    public List<Employee> getEmployeesByUserId(String userId){
+        return employeeRepository.findAllByUserId(userId);
     }
 
     public void deleteEmployee(Long id){

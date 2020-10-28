@@ -31,6 +31,8 @@ public class Vehicle implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "vehicle")
     private List<Transaction> transactions;
+    @OneToOne
+    private Employee employee;
 
     public Vehicle(){}
 
@@ -105,6 +107,14 @@ public class Vehicle implements Serializable {
 
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override

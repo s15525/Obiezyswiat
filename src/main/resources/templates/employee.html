@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Obierzyswiat</a>
+    <a class="navbar-brand" href="/home">Obiezyswiat</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
             aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,23 +20,26 @@
 
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home page<span class="sr-only">(current)</span></a>
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">Home page<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/acceptTransaction">Apply transaction</a>
+                <a class="nav-link" href="/transaction/acceptTransaction">Apply transaction</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/allTransactions">Available transaction</a>
+                <a class="nav-link" href="/transaction/allTransactions">Available transaction</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Map Driver</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/allVehicles">Vehicle</a>
+                <a class="nav-link" href="/vehicle/allVehicles">Vehicle</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/allEmployees">Employee</a>
+            <li class="nav-item">
+                <a class="nav-link" href="/employee/allEmployees">Employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
     </div>
@@ -62,20 +65,20 @@
                 <td th:text="${employee.salary}"></td>
                 <td th:text="${employee.position}"></td>
                 <td>
-                    <a class="btn btn-warning eBtn" th:href="@{getOne/(Id=${employee.id})}">Edit</a>
-                    <a class="btn btn-danger delBtn" th:href="@{delete/(Id=${employee.id})}">Delete</a>
+                    <a class="btn btn-warning eBtn" th:href="@{/employee/getOne/(Id=${employee.id})}">Edit</a>
+                    <a class="btn btn-danger delBtn" th:href="@{/employee/delete/(Id=${employee.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="buttons-box">
-        <a href="/addEmployee" type="button" class="btn btn-primary">Add employee</a>
+        <a href="/employee/addEmployee" type="button" class="btn btn-primary">Add employee</a>
     </div>
 </div>
 
 <div class="myForm">
-    <form action="#" th:action="@{/update}" method="post">
+    <form action="#" th:action="@{/employee/update}" method="post">
         <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
              id="exampleModal" role="dialog"
              tabindex="-1">
