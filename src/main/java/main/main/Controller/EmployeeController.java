@@ -16,8 +16,8 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Secured("ROLE_USER")
-@Controller
 @RequestMapping("/employee")
+@Controller
 public class EmployeeController {
 
     private final EmployeeService employeeService;

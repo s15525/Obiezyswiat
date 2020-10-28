@@ -63,6 +63,10 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
+    public List<Employee> getEmployeesByUserId(String userId){
+        return employeeRepository.findAllByUserId(userId);
+    }
+
     public void deleteEmployee(Long id){
         EmployeeDetails employeeDetails = employeeDetailsRepository.getById(this.getOne(id).get().getEmployeeDetails().getId());
         List<Transaction> transactionList = transactionRepository.findAllByEmployee(this.getOne(id).get());

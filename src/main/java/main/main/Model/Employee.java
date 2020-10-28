@@ -35,6 +35,9 @@ public class Employee implements Serializable {
     @JsonIgnore
     @OneToOne(mappedBy = "employee", cascade = CascadeType.PERSIST)
     private Vehicle vehicle;
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    private List<Message> messages;
 
 
 
@@ -120,6 +123,14 @@ public class Employee implements Serializable {
         this.vehicle = vehicle;
     }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -128,7 +139,6 @@ public class Employee implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", salary=" + salary +
                 ", position='" + position + '\'' +
-                ", userId=" + userId +
-                ", transactions=" + transactions;
+                ", userId=" + userId;
     }
 }
