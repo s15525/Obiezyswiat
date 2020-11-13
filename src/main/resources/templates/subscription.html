@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+    <script type="text/css" rel="stylesheet" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link rel="stylesheet" href="../static/css/subscription.css/">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/home">Obiezyswiat</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">Home page<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/acceptTransaction">Apply transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/allTransactions">Available transaction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Map Driver</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/vehicle/allVehicles">Vehicle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/employee/allEmployees">Employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/subscription/allSubscriptions">Subscription</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<section>
+    <div class="container py-5" >
+        <h1 class="text-center pricing">Subscriptions</h1> <br>
+        <div class="row text-center align-items-end">
+            <div class="col-lg-4 mb-5 mb-lg-0" th:each="subscription: ${subscriptionList}">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h1 class="h6 text-uppercase font-weight-bold mb-4"th:text="${subscription.name}"></h1>
+                    <h2 class="h1 font-weight-bold" th:text="${subscription.prize + ' zl / miesiecznie'}"></h2>
+                    <div class="custom-separator my-4 mx-auto bg-warning"></div>
+                    <ul class="list-unstyled my-5 text-small text-left">
+                        <li class="mb-3"> <i class="fa fa-check mr-2 text-primary" th:text="${subscription.description}"></i></li>
+                    </ul> <a th:href="@{/subscription/assignSubscription/(Id=${subscription.id})}" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -3,7 +3,7 @@ package main.main.Service;
 import main.main.Model.Employee;
 import main.main.Model.EmployeeDetails;
 import main.main.Model.Transaction;
-import main.main.Model.Vehicle;
+import main.main.Model.User;
 import main.main.Repository.EmployeeDetailsRepository;
 import main.main.Repository.EmployeeRepository;
 import main.main.Repository.TransactionRepository;
@@ -34,8 +34,8 @@ public class TransactionService {
         return transactionRepository.getAllByEmployeeIsNull();
     }
 
-    public List<Transaction> showAssignedTransactions(String userId){
-        return transactionRepository.findAllByEmployeeUserId(userId);
+    public List<Transaction> showAssignedTransactions(User user){
+        return transactionRepository.findAllByEmployeeUser(user);
     }
 
     public Optional<Transaction> getOne(Long id){

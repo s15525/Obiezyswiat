@@ -1,9 +1,6 @@
 package main.main.Service;
 
-import main.main.Model.Employee;
-import main.main.Model.EmployeeDetails;
-import main.main.Model.Transaction;
-import main.main.Model.Vehicle;
+import main.main.Model.*;
 import main.main.Repository.EmployeeDetailsRepository;
 import main.main.Repository.EmployeeRepository;
 import main.main.Repository.TransactionRepository;
@@ -11,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Service
@@ -19,27 +17,48 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeDetailsRepository employeeDetailsRepository;
     private final TransactionRepository transactionRepository;
+    private final UserService userService;
 
     public EmployeeService(EmployeeRepository employeeRepository, EmployeeDetailsRepository employeeDetailsRepository,
-                           TransactionRepository transactionRepository) {
+                           TransactionRepository transactionRepository, UserService userService) {
         this.employeeRepository = employeeRepository;
         this.employeeDetailsRepository = employeeDetailsRepository;
         this.transactionRepository = transactionRepository;
+        this.userService = userService;
     }
 
-    public void addEmployee(Employee employee, EmployeeDetails employeeDetails){
-        employee.setEmployeeDetails(employeeDetails);
+    public void addEmployee(Employee employee, EmployeeDetails employeeDetails, String userId) throws Exception {
+        Set<Employee> employeeSet = userService.getUserById(userId).getEmployees();
+        Subscription subscription = userService.getUserById(userId).getSubscription();
 
-        employeeDetailsRepository.save(employeeDetails);
-        employeeRepository.save(employee);
+        if(subscription == null) {
+            throw new Exception("Nie posiadasz subskrypcji");
+        }else if(subscription.getName().equals("Standard") && employeeSet.size() == 5) {
+            throw new Exception("Masz maksymalna liczbe pracownikow dla twojego abonamentu");
+        }else if(subscription.getName().equals("Premium") && employeeSet.size() == 10) {
+            throw new Exception("Masz maksymalna liczbe pracownikow dla twojego abonamentu");
+        }else {
+            employee.setEmployeeDetails(employeeDetails);
+
+            employeeDetailsRepository.save(employeeDetails);
+            employeeRepository.save(employee);
+        }
     }
 
     public List<Employee> showAllEmployees(){
         return employeeRepository.findAll();
     }
 
-    public List<Employee> showEmployeesByUserId(String userId){
-        return employeeRepository.findAllByUserId(userId);
+    public List<Employee> showEmployeesByUserId(User user){
+        return employeeRepository.findAllByUser(user);
+    }
+
+    public List<Employee> showEmployeesWithoutVehicle(User user){
+        return employeeRepository.employees(user);
+    }
+
+    public Employee getEmployeeByUserId(User user){
+        return employeeRepository.getByUser(user);
     }
 
     public void updateEmployee(Employee employee){
@@ -63,8 +82,8 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public List<Employee> getEmployeesByUserId(String userId){
-        return employeeRepository.findAllByUserId(userId);
+    public List<Employee> getEmployeesByUserId(User user){
+        return employeeRepository.findAllByUser(user);
     }
 
     public void deleteEmployee(Long id){

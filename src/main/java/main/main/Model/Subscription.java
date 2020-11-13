@@ -2,6 +2,7 @@ package main.main.Model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "subscription")
@@ -14,22 +15,18 @@ public class Subscription implements Serializable {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
     private float prize;
-    @Column(name = "start_date",nullable = false)
-    private String startDate;
-    @Column(name = "end_date", nullable = false)
-    private String endDate;
-    @Column(name = "user_id", nullable = false)
-    private String userId;
+    @OneToMany(mappedBy = "subscription")
+    private Set<User> users;
 
     public Subscription(){}
 
-    public Subscription(String name, float prize, String startDate, String endDate, String userId) {
+    public Subscription(String name, String description, float prize) {
         this.name = name;
+        this.description = description;
         this.prize = prize;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.userId = userId;
     }
 
     public Long getId() {
@@ -56,28 +53,20 @@ public class Subscription implements Serializable {
         this.prize = prize;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     @Override
@@ -85,10 +74,8 @@ public class Subscription implements Serializable {
         return "Subscription{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", prize=" + prize +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", userId='" + userId + '\'' +
                 '}';
     }
 }
