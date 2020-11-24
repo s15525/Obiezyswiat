@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction</title>
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link href="../static/css/transactionView.css" th:href="@{/css/transactionView.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="transaction_container">
+    <div class="data-column">
+        <form action="#" th:action="@{/register}" th:object="${Transaction}" method="post">
+            <p class="lead">Transakcja</p>
+            <div class="form-group">
+                <label>Miejsce załadunku</label>
+                <label th:text="${loadingPlace}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+            </div>
+            <div class="form-group">
+                <label>Miejsce rozładunku</label>
+                <label th:text="${loadingPlace}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+            </div>
+            <div class="form-group">
+                <label>Typ nadwozia</label>
+                <label th:text="${loadingPlace}"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+            </div>
+            <div class="form-group">
+                <label>Zgłoszono</label>
+                <label th:text="${loadingPlace}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+            </div>
+            <div class="form-group">
+                <label>Ważne do</label>
+                <label th:text="${loadingPlace}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
+            </div>
+            <div class="form-group">
+                <label>Kierowca</label>
+                <select name="cars" th:field="${employeesList.id}"  id="kierowca">
+                    <option value="0">Wybierz kierowce</option>
+                    <option th:each="operator : ${employeesList}" th:value="${Employee.id}" th:text="${operator.imie}"></option>
+                </select>
+            </div>
+            <div class="button-flex">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
