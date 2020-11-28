@@ -37,10 +37,10 @@ public class TransactionController {
     @GetMapping("/allTransactions")
     public String showTransactions(Model model, HttpServletRequest request){
         List<Transaction> transactionList = new ArrayList<>();
-        transactionList.add(new Transaction("Xayoo industries", 500f, 400f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,9), "Krakow", "Warszawa", "uwaga", "513-512-155"));
-        transactionList.add(new Transaction("SBM", 200f, 100f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,6), "Krakow", "Warszawa", "uwaga", "505-102-011"));
-        transactionList.add(new Transaction("BMW Company", 1200f, 1500f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,9), "Munich", "Warszawa", "M3", "666-111-222"));
-        transactionList.add(new Transaction("Orlen", 500f, 400f, LocalDate.of(2020,10, 12), LocalDate.of(2020,8,9), "Warszawa", "Bialystok", "paliwko", "517-513-341"));
+        transactionList.add(new Transaction("Xayoo industries", 500f, 400f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,9), "Krakow", "Warszawa", "uwaga", "513-512-155", LocalDate.of(2020,8,8), LocalDate.of(2020,12,8)));
+        transactionList.add(new Transaction("SBM", 200f, 100f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,6), "Krakow", "Warszawa", "uwaga", "505-102-011", LocalDate.of(2020,8,8), LocalDate.of(2020,12,8)));
+        transactionList.add(new Transaction("BMW Company", 1200f, 1500f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,9), "Munich", "Warszawa", "M3", "666-111-222", LocalDate.of(2020,8,8), LocalDate.of(2020,12,8)));
+        transactionList.add(new Transaction("Orlen", 500f, 400f, LocalDate.of(2020,10, 12), LocalDate.of(2020,8,9), "Warszawa", "Bialystok", "paliwko", "517-513-341", LocalDate.of(2020,8,8), LocalDate.of(2020,12,8)));
 
         transactionService.addTransactions(transactionList);
 
@@ -62,23 +62,22 @@ public class TransactionController {
         return transactionService.getOne(Id);
     }
 
-    @GetMapping("/transaction/assign")
+    @GetMapping("/assign")
     public String showBeforeAssignTransaction(Long Id, Model model, HttpServletRequest request){
         KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
         model.addAttribute("transaction", transactionService.getOne(Id));
         model.addAttribute("employeeList", employeeService.getEmployeesByUserId(userService.getUserById(principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject())));
-        return "assignSubscription";
+        return "transactionView";
     }
 
-    @PostMapping("/transaction/assign")
+    @PostMapping("/assign")
     public String assignTransaction(@ModelAttribute Employee employee, @ModelAttribute Transaction transaction, BindingResult bindingResult){
         System.out.println(employee.toString()+ " --EMPLO");
         System.out.println(transaction.toString()+ " ---TRANS");
         if(bindingResult.hasErrors()) {
             return "redirect:/allTransactions";
-        }else{
+        }else
             transactionService.assign(transaction, employee);
             return "homePage";
-        }
     }
 }

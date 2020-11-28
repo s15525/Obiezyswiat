@@ -69,7 +69,7 @@
                 <td th:text="${transaction.loadingPlace}"></td>
                 <td th:text="${transaction.unloadingPlace}"></td>
                 <td>
-                    <a class="btn btn-warning eBtn" th:href="@{/transaction/assign/(Id=${transaction.id})}">Przyjmij</a>
+                    <a class="btn btn-warning eBtn" th:href="@{/assign/(Id=${transaction.id})}">Przyjmij</a>
                     <a class="btn btn-warning eBtn" th:href="@{/transaction/getOne/(Id=${transaction.id})}">Wiecej Info</a>
 
                 </td>

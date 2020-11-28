@@ -32,6 +32,10 @@ public class Transaction implements Serializable {
     private String description;
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
+    @Column(name = "notification_date")
+    private String notificationDate;
+    @Column(name = "end_date")
+    private String endDate;
 
     @ManyToOne
     @JoinColumn(name = "id_employee")
@@ -40,8 +44,9 @@ public class Transaction implements Serializable {
 
     public Transaction(){}
 
-    public Transaction(String companyName, float bid, float weight, LocalDate loadingDate, LocalDate unloadingDate,
-                       String loadingPlace, String unloadingPlace, String description, String phoneNumber) {
+    public Transaction(String companyName, float bid, float weight, LocalDate loadingDate,
+                       LocalDate unloadingDate, String loadingPlace, String unloadingPlace,
+                       String description, String phoneNumber, LocalDate notificationDate, LocalDate endDate) {
         this.companyName = companyName;
         this.bid = bid;
         this.weight = weight;
@@ -51,6 +56,8 @@ public class Transaction implements Serializable {
         this.unloadingPlace = unloadingPlace;
         this.description = description;
         this.phoneNumber = phoneNumber;
+        this.notificationDate = String.valueOf(notificationDate);
+        this.endDate = String.valueOf(endDate);
     }
 
     public Long getId() {
@@ -142,6 +149,22 @@ public class Transaction implements Serializable {
         this.description = description;
     }
 
+    public String getNotificationDate() {
+        return notificationDate;
+    }
+
+    public void setNotificationDate(String notificationDate) {
+        this.notificationDate = notificationDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
@@ -155,6 +178,8 @@ public class Transaction implements Serializable {
                 ", unloadingPlace='" + unloadingPlace + '\'' +
                 ", description='" + description + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", notificationDate='" + notificationDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 '}';
     }
 }
