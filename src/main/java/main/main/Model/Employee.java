@@ -37,6 +37,7 @@ public class Employee implements Serializable {
     private List<Message> messages;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
 

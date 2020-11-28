@@ -29,8 +29,6 @@ public class Vehicle implements Serializable {
     private String insuranceDate;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "vehicle")
-    private List<Transaction> transactions;
     @OneToOne
     private Employee employee;
 
@@ -99,14 +97,6 @@ public class Vehicle implements Serializable {
 
     public void setInsuranceDate(String insuranceDate) {
         this.insuranceDate = insuranceDate;
-    }
-
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
     public Employee getEmployee() {

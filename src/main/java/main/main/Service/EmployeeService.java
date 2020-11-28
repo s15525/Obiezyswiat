@@ -91,7 +91,6 @@ public class EmployeeService {
         List<Transaction> transactionList = transactionRepository.findAllByEmployee(this.getOne(id).get());
         for(Transaction transaction : transactionList){
             transaction.setEmployee(null);
-            transaction.setVehicle(null); //to bedzie trzeba ladnie schowac
         }
         employeeRepository.deleteById(id);
         employeeDetailsRepository.deleteById(employeeDetails.getId());

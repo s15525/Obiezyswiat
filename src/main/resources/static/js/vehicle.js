@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('.nBtn, .table .eBtn').on('click', function (event) {
         event.preventDefault();
         var href = $(this).attr('href');
-        var text = $(this).text(); //return New or Edit
+        var text = $(this).text(); //return Edit or Delete
 
         if (text === 'Edit') {
             $.get(href, function (vehicle, status) {

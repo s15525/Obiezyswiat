@@ -18,7 +18,6 @@ import java.util.Optional;
 
 @Secured("ROLE_USER")
 @Controller
-@RequestMapping("/vehicle")
 public class VehicleController {
     private final VehicleService vehicleService;
     private final EmployeeService employeeService;
@@ -52,25 +51,25 @@ public class VehicleController {
         }else{
             employeeService.updateEmployeeVehicle(employee.getId(), vehicle);
             vehicleService.addVehicle(vehicle, employee);
-            return "redirect:/vehicle/allVehicles";
+            return "redirect:/allVehicles";
         }
     }
 
-    @GetMapping("/getOne")
+    @GetMapping("/vehicle/getOne")
     @ResponseBody
     public Optional<Vehicle> getOne(Long Id){
         return vehicleService.getOne(Id);
     }
 
-    @RequestMapping("/update")
+    @RequestMapping("/vehicle/update")
     public String update(Vehicle vehicle){
         vehicleService.updateVehicle(vehicle);
-        return "redirect:/vehicle/allVehicles";
+        return "redirect:/allVehicles";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/vehicle/delete")
     public String delete(Long Id){
         vehicleService.deleteVehicle(Id);
-        return "redirect:/vehicle/allVehicles";
+        return "redirect:/allVehicles";
     }
 }

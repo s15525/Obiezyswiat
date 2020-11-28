@@ -1,7 +1,10 @@
 package main.main.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "transaction")
@@ -15,33 +18,39 @@ public class Transaction implements Serializable {
     private String companyName;
     @Column(name = "bid", nullable = false)
     private float bid;
-    @Column(name = "route", nullable = false)
-    private String route;
+    @Column(name = "weight", nullable = false)
+    private float weight;
+    @Column(name = "loading_date", nullable = false)
+    private String loadingDate;
+    @Column(name = "unloading_date", nullable = false)
+    private String unloadingDate;
     @Column(name = "loading_place", nullable = false)
     private String loadingPlace;
     @Column(name = "unloading_place", nullable = false)
     private String unloadingPlace;
     @Column(nullable = false)
     private String description;
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
 
     @ManyToOne
     @JoinColumn(name = "id_employee")
+    @JsonIgnore
     private Employee employee;
-
-    @ManyToOne
-    @JoinColumn(name = "id_vehicle")
-    private Vehicle vehicle;
 
     public Transaction(){}
 
-    public Transaction(String companyName, float bid, String route, String loadingPlace,
-                       String unloadingPlace, String description) {
+    public Transaction(String companyName, float bid, float weight, LocalDate loadingDate, LocalDate unloadingDate,
+                       String loadingPlace, String unloadingPlace, String description, String phoneNumber) {
         this.companyName = companyName;
         this.bid = bid;
-        this.route = route;
+        this.weight = weight;
+        this.loadingDate = String.valueOf(loadingDate);
+        this.unloadingDate = String.valueOf(unloadingDate);
         this.loadingPlace = loadingPlace;
         this.unloadingPlace = unloadingPlace;
         this.description = description;
+        this.phoneNumber = phoneNumber;
     }
 
     public Long getId() {
@@ -68,13 +77,6 @@ public class Transaction implements Serializable {
         this.bid = bid;
     }
 
-    public String getRoute() {
-        return route;
-    }
-
-    public void setRoute(String route) {
-        this.route = route;
-    }
 
     public String getLoadingPlace() {
         return loadingPlace;
@@ -92,20 +94,44 @@ public class Transaction implements Serializable {
         this.unloadingPlace = unloadingPlace;
     }
 
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public String getLoadingDate() {
+        return loadingDate;
+    }
+
+    public void setLoadingDate(String loadingDate) {
+        this.loadingDate = loadingDate;
+    }
+
+    public String getUnloadingDate() {
+        return unloadingDate;
+    }
+
+    public void setUnloadingDate(String unloadingDate) {
+        this.unloadingDate = unloadingDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public Employee getEmployee() {
         return employee;
     }
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
     }
 
     public String getDescription() {
@@ -122,10 +148,13 @@ public class Transaction implements Serializable {
                 "id=" + id +
                 ", companyName='" + companyName + '\'' +
                 ", bid=" + bid +
-                ", route='" + route + '\'' +
+                ", weight=" + weight +
+                ", loadingDate='" + loadingDate + '\'' +
+                ", unloadingDate='" + unloadingDate + '\'' +
                 ", loadingPlace='" + loadingPlace + '\'' +
                 ", unloadingPlace='" + unloadingPlace + '\'' +
                 ", description='" + description + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

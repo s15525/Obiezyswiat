@@ -6,18 +6,17 @@ import main.main.Service.EmployeeService;
 import main.main.Service.TransactionService;
 import main.main.Service.UserService;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Secured("ROLE_USER")
@@ -36,8 +35,18 @@ public class TransactionController {
     }
 
     @GetMapping("/allTransactions")
-    public String showTransactions(Model model){
-        model.addAttribute("transactionList", transactionService.showAvailableTransactions());
+    public String showTransactions(Model model, HttpServletRequest request){
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList.add(new Transaction("Xayoo industries", 500f, 400f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,9), "Krakow", "Warszawa", "uwaga", "513-512-155"));
+        transactionList.add(new Transaction("SBM", 200f, 100f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,6), "Krakow", "Warszawa", "uwaga", "505-102-011"));
+        transactionList.add(new Transaction("BMW Company", 1200f, 1500f, LocalDate.of(2020,8, 5), LocalDate.of(2020,8,9), "Munich", "Warszawa", "M3", "666-111-222"));
+        transactionList.add(new Transaction("Orlen", 500f, 400f, LocalDate.of(2020,10, 12), LocalDate.of(2020,8,9), "Warszawa", "Bialystok", "paliwko", "517-513-341"));
+
+        transactionService.addTransactions(transactionList);
+
+        KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
+
+        model.addAttribute("transactionList", transactionService.showAssignedTransactions(userService.getUserById(principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject())));
         return "availableTransaction";
     }
 
@@ -47,26 +56,29 @@ public class TransactionController {
         return "acceptTransaction";
     }
 
-    public String acceptTransaction(@ModelAttribute @Valid Transaction transaction, Employee employee, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return "acceptTransaction";
-        else{
-
-            return "homePage";
-        }
-    }
-
     @GetMapping("/transaction/getOne")
     @ResponseBody
     public Optional<Transaction> getOne(Long Id){
         return transactionService.getOne(Id);
     }
 
-    @RequestMapping("/transaction/assign")
-    public String assignTransaction(Transaction transaction, Model model, HttpServletRequest request, Long Id){
+    @GetMapping("/transaction/assign")
+    public String showBeforeAssignTransaction(Long Id, Model model, HttpServletRequest request){
         KeycloakAuthenticationToken principal = (KeycloakAuthenticationToken) request.getUserPrincipal();
+        model.addAttribute("transaction", transactionService.getOne(Id));
         model.addAttribute("employeeList", employeeService.getEmployeesByUserId(userService.getUserById(principal.getAccount().getKeycloakSecurityContext().getIdToken().getSubject())));
-        transactionService.assign(transaction, Id);
-        return "redirect:/acceptTransaction";
+        return "assignSubscription";
+    }
+
+    @PostMapping("/transaction/assign")
+    public String assignTransaction(@ModelAttribute Employee employee, @ModelAttribute Transaction transaction, BindingResult bindingResult){
+        System.out.println(employee.toString()+ " --EMPLO");
+        System.out.println(transaction.toString()+ " ---TRANS");
+        if(bindingResult.hasErrors()) {
+            return "redirect:/allTransactions";
+        }else{
+            transactionService.assign(transaction, employee);
+            return "homePage";
+        }
     }
 }

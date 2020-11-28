@@ -1,9 +1,6 @@
 package main.main.Service;
 
-import main.main.Model.Employee;
-import main.main.Model.EmployeeDetails;
-import main.main.Model.Transaction;
-import main.main.Model.User;
+import main.main.Model.*;
 import main.main.Repository.EmployeeDetailsRepository;
 import main.main.Repository.EmployeeRepository;
 import main.main.Repository.TransactionRepository;
@@ -18,16 +15,25 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final EmployeeRepository employeeRepository;
     private final EmployeeDetailsRepository employeeDetailsRepository;
+    private final VehicleService vehicleService;
 
     public TransactionService(TransactionRepository transactionRepository, EmployeeRepository employeeRepository,
-                              EmployeeDetailsRepository employeeDetailsRepository) {
+                              EmployeeDetailsRepository employeeDetailsRepository, VehicleService vehicleService) {
         this.transactionRepository = transactionRepository;
         this.employeeRepository = employeeRepository;
         this.employeeDetailsRepository = employeeDetailsRepository;
+        this.vehicleService = vehicleService;
     }
 
     public void addTransaction(Transaction transaction){
         transactionRepository.save(transaction);
+    }
+
+    public void addTransactions(List<Transaction> transactionList){
+        if(showAvailableTransactions().isEmpty())
+            transactionList.forEach(transactionRepository::save);
+        else
+            System.out.println("Tranzakcje sa w bazie");
     }
 
     public List<Transaction> showAvailableTransactions(){
@@ -42,8 +48,7 @@ public class TransactionService {
         return transactionRepository.findById(id);
     }
 
-    public void assign(Transaction transaction, Long id){
-        Employee employee = employeeRepository.findById(id).get();
+    public void assign(Transaction transaction, Employee employee){
         if(!employee.getTransactions().contains(transaction)){
             transaction.setEmployee(employee);
 

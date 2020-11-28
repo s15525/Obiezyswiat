@@ -15,7 +15,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> getAllByEmployeeIsNull();
     List<Transaction> getAllByEmployeeIsNotNull();
     List<Transaction> findAllByEmployee(Employee employee);
-    List<Transaction> findAllByVehicle(Vehicle vehicle);
     List<Transaction> findAllByEmployeeUser(User user);
     Optional<Transaction> findById(Long id);
 }

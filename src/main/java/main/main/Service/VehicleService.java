@@ -51,12 +51,6 @@ public class VehicleService {
     }
 
     public void deleteVehicle(Long id){
-        List<Transaction> transactionList = transactionRepository.findAllByVehicle(getOne(id).get());
-        for(Transaction transaction : transactionList){
-            transaction.setVehicle(null);
-            transaction.setVehicle(null); //to bedzie trzeba ladnie schowac
-        }
         vehicleRepository.deleteById(id);
-        transactionList.forEach(transactionRepository::save);
     }
 }

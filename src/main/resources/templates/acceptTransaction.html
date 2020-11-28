@@ -20,10 +20,10 @@
                 <a class="nav-link" href="/home">Home page<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/transaction/acceptTransaction">Apply transaction</a>
+                <a class="nav-link" href="/acceptTransaction">Apply transaction</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/transaction/allTransactions">Available transaction</a>
+                <a class="nav-link" href="/allTransactions">Available transaction</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Map Driver</a>
@@ -51,7 +51,9 @@
                 <th scope="col">Type</th>
                 <th scope="col">Company Name</th>
                 <th scope="col">Bid</th>
-                <th scope="col">Route</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Loading Date</th>
+                <th scope="col">Unloading Date</th>
                 <th scope="col">Loading Place</th>
                 <th scope="col">Unloading Place</th>
             </tr>
@@ -61,91 +63,20 @@
                 <th scope="row">Default</th>
                 <td th:text="${transaction.companyName}"></td>
                 <td th:text="${transaction.bid}"></td>
-                <td th:text="${transaction.route}"></td>
+                <td th:text="${transaction.weight}"></td>
+                <td th:text="${transaction.loadingDate}"></td>
+                <td th:text="${transaction.unloadingDate}"></td>
                 <td th:text="${transaction.loadingPlace}"></td>
                 <td th:text="${transaction.unloadingPlace}"></td>
                 <td>
-                    <a class="btn btn-warning eBtn" th:href="@{/transaction/getOne/(Id=${transaction.id})}">Assign</a>
+                    <a class="btn btn-warning eBtn" th:href="@{/transaction/assign/(Id=${transaction.id})}">Przyjmij</a>
+                    <a class="btn btn-warning eBtn" th:href="@{/transaction/getOne/(Id=${transaction.id})}">Wiecej Info</a>
+
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
-    <div class="myForm">
-        <form action="#" th:action="@{/transaction/assign}" method="post">
-            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
-                 id="exampleModal" role="dialog"
-                 tabindex="-1">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Assign Transaction</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="form-group">
-                                <label for="id" class="col-form-label">Id:</label>
-                                <input type="text" class="form-control" id="id" name="id" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="companyName" class="col-form-label">Company Name:</label>
-                                <input type="text" class="form-control" id="companyName" name="companyName" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="bid" class="col-form-label">Bid:</label>
-                                <input type="text" class="form-control" id="bid"  name="bid" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="route" class="col-form-label">Route:</label>
-                                <input type="text" class="form-control" id="route"  name="route" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="loadingPlace" class="col-form-label">Loading Place:</label>
-                                <input type="text" class="form-control" id="loadingPlace"  name="loadingPlace" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="unloadingPlace" class="col-form-label">Unloading Place:</label>
-                                <input type="text" class="form-control" id="unloadingPlace"  name="unloadingPlace" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="employee">Enter job</label>
-                                <select class="form-control" id="employee" name="employee">
-                                    <option value="employeeId" id="employeeId" name="employeeId"></option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Assign</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            type="text/javascript"></script>
-    <script crossorigin="anonymous"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="text/javascript"></script>
-    <script crossorigin="anonymous"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-    <script crossorigin="anonymous" src="../static/js/transaction.js.js" th:src="@{js/transaction.js}"
-            type="text/javascript"></script>
-
 </div>
 </body>
 </html>
