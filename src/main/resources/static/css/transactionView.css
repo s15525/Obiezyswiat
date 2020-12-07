@@ -7,11 +7,15 @@
 }
 .data-column{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     width: auto;
     height: auto;
     padding: .5rem;
+}
+.block{
+    display: flex;
+    flex-direction: column;
 }
 .form-group{
     display: flex;
@@ -20,4 +24,9 @@
     width: auto;
     height: auto;
     padding: .5rem;
+}
+
+.button-flex{
+    display: flex;
+    flex-direction: row-reverse;
 }
