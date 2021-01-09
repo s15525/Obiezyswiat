@@ -1,5 +1,6 @@
 package main.main.Service;
 
+import main.main.Model.User;
 import main.main.Model.Employee;
 import main.main.Model.Transaction;
 import main.main.Model.Vehicle;
@@ -30,8 +31,8 @@ public class VehicleService {
         return (List<Vehicle>) vehicleRepository.findAll();
     }
 
-    public List<Vehicle> showOurCompanyVehicles(String userId){
-        return vehicleRepository.findAllByEmployeeUserId(userId);
+    public List<Vehicle> showOurCompanyVehicles(User user){
+        return vehicleRepository.findAllByEmployeeUser(user);
     }
 
     public Optional<Vehicle> getOne(Long id){
@@ -50,12 +51,6 @@ public class VehicleService {
     }
 
     public void deleteVehicle(Long id){
-        List<Transaction> transactionList = transactionRepository.findAllByVehicle(getOne(id).get());
-        for(Transaction transaction : transactionList){
-            transaction.setVehicle(null);
-            transaction.setVehicle(null); //to bedzie trzeba ladnie schowac
-        }
         vehicleRepository.deleteById(id);
-        transactionList.forEach(transactionRepository::save);
     }
 }

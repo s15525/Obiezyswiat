@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,8 +22,6 @@ public class Employee implements Serializable {
     private float salary;
     @Column(name = "position", nullable = false)
     private String position;
-    @Column(name = "user_id", nullable = false)
-    private String userId;
 
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
@@ -38,17 +35,20 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     private List<Message> messages;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private User user;
 
 
 
     public Employee(){}
 
-    public Employee(String firstName, String lastName, float salary, String position, String userId) {
+    public Employee(String firstName, String lastName, float salary, String position) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.position = position;
-        this.userId = userId;
     }
 
     public Long getId() {
@@ -107,14 +107,6 @@ public class Employee implements Serializable {
         this.employeeDetails = employeeDetails;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public Vehicle getVehicle() {
         return vehicle;
     }
@@ -131,6 +123,14 @@ public class Employee implements Serializable {
         this.messages = messages;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -138,7 +138,6 @@ public class Employee implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", salary=" + salary +
-                ", position='" + position + '\'' +
-                ", userId=" + userId;
+                ", position='" + position + '\'';
     }
 }

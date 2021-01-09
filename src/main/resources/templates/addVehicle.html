@@ -20,19 +20,22 @@
                 <a class="nav-link" href="/home">Home page<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/transaction/acceptTransaction">Apply transaction</a>
+                <a class="nav-link" href="/acceptTransaction">Apply transaction</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/transaction/allTransactions">Available transaction</a>
+                <a class="nav-link" href="/allTransactions">Available transaction</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Map Driver</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/vehicle/allVehicles">Vehicle</a>
+                <a class="nav-link" href="/allVehicles">Vehicle</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/employee/allEmployees">Employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/subscription/allSubscriptions">Subscription</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -42,7 +45,7 @@
 </nav>
 <div class="register-container">
     <div class="data-column">
-        <form action="#" th:action="@{/vehicle/addVehicle}" method="post">
+        <form action="#" th:action="@{/addVehicle}" method="post">
             <div class="small-text">
                 <p class="lead">Add new Employee</p>
                 <div class="form-group">
@@ -76,7 +79,7 @@
                 </div>
                 <div class="form-group">
                     <label for="brand-type">Enter car brand</label>
-                    <select class="form-control" id="employee" th:field="*{vehicle.employee}">
+                    <select class="form-control" th:field="*{vehicle.employee}">
                         <option th:each="employee: ${employeeList}"
                             th:value="${employee.id}"
                             th:utext="${employee.firstName + ' ' + employee.lastName}"></option>

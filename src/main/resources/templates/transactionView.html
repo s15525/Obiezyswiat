@@ -9,6 +9,69 @@
 </head>
 <body>
 <div class="transaction_container">
+
+    <div class="data-column">
+        <form action="#" th:action="@{/assign}" method="post">
+            <p class="lead">Transakcja</p>
+                <input type="hidden" th:field="${transaction.id}" readonly>
+            <div class="form-group">
+                <label>Company name</label>
+                <input type="text" th:field="${transaction.companyName}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Bid</label>
+                <input type="text" th:field="${transaction.bid}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Weight</label>
+                <input type="text" th:field="${transaction.weight}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Miejsce załadunku</label>
+                <input type="text" th:field="${transaction.loadingPlace}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Miejsce rozładunku</label>
+                <input type="text" th:field="${transaction.unloadingPlace}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Data zaladunku</label>
+                <input type="text" th:field="${transaction.loadingDate}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Data rozladunku</label>
+                <input type="text" th:field="${transaction.unloadingDate}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Zgłoszono</label>
+                <input type="text" th:field="${transaction.notificationDate}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Ważne do</label>
+                <input type="text" th:field="${transaction.endDate}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" th:field="${transaction.description}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Nr tel</label>
+                <input type="text" th:field="${transaction.phoneNumber}" readonly>
+            </div>
+            <div class="form-group">
+                <label>Kierowca</label>
+                <select class="form-control" th:field="*{transaction.employee}">
+                    <option th:each="employee: ${employeeList}"
+                            th:value="${employee.id}"
+                            th:utext="${employee.firstName + ' ' + employee.lastName}"></option>
+                </select>
+            </div>
+            <div class="button-flex">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+=======
     <form action="#" th:action="@{/assign}" method="post">
         <p class="lead">Transakcja</p>
         <div class="data-column">
@@ -74,6 +137,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
+
 </div>
 </body>
 </html>

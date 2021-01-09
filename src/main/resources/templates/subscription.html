@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Available Transaction</title>
     <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
-    <link href="../static/css/availableTransaction.css" th:href="@{/css/availableTransaction.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+    <script type="text/css" rel="stylesheet" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link rel="stylesheet" href="../static/css/subscription.css/">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -43,34 +47,22 @@
         </ul>
     </div>
 </nav>
-<div class="box">
-    <p class="lead">Available Transaction</p>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Company Name</th>
-            <th scope="col">Bid</th>
-            <th scope="col">Weight</th>
-            <th scope="col">Loading Date</th>
-            <th scope="col">Unloading Date</th>
-            <th scope="col">Loading Place</th>
-            <th scope="col">Unloading Place</th>
-        </tr>
-        </thead>
-        <tbody th:each="transaction: ${transactionList}">
-        <tr>
-            <th scope="row">Default</th>
-            <td th:text="${transaction.companyName}"></td>
-            <td th:text="${transaction.bid}"></td>
-            <td th:text="${transaction.weight}"></td>
-            <td th:text="${transaction.loadingDate}"></td>
-            <td th:text="${transaction.unloadingDate}"></td>
-            <td th:text="${transaction.loadingPlace}"></td>
-            <td th:text="${transaction.unloadingPlace}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<section>
+    <div class="container py-5" >
+        <h1 class="text-center pricing">Subscriptions</h1> <br>
+        <div class="row text-center align-items-end">
+            <div class="col-lg-4 mb-5 mb-lg-0" th:each="subscription: ${subscriptionList}">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h1 class="h6 text-uppercase font-weight-bold mb-4"th:text="${subscription.name}"></h1>
+                    <h2 class="h1 font-weight-bold" th:text="${subscription.prize + ' zl / miesiecznie'}"></h2>
+                    <div class="custom-separator my-4 mx-auto bg-warning"></div>
+                    <ul class="list-unstyled my-5 text-small text-left">
+                        <li class="mb-3"> <i class="fa fa-check mr-2 text-primary" th:text="${subscription.description}"></i></li>
+                    </ul> <a th:href="@{/subscription/assignSubscription/(Id=${subscription.id})}" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
