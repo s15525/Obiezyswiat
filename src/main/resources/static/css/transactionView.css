@@ -1,0 +1,32 @@
+.transaction_container{
+    padding: 10px;
+    display:flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.data-column{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    height: auto;
+    padding: .5rem;
+}
+.block{
+    display: flex;
+    flex-direction: column;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: auto;
+    padding: .5rem;
+}
+
+.button-flex{
+    display: flex;
+    flex-direction: row-reverse;
+}
